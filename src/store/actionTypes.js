@@ -1,1 +1,3 @@
 export const FETCH_TODOS = "FETCH_TODOS";
+export const TODOS_SUCCESS = "TODOS_SUCCESS";
+export const CREATE_SUCCESS = "CREATE_SUCCESS";

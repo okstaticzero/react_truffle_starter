@@ -7,6 +7,7 @@ import logo from "../assets/images/logo.svg";
 import "./App.css";
 import ListTodos from "../todos/ListTodos";
 import "material-design-icons/iconfont/material-icons.css";
+import { fetchTodos, createTodo } from "../todos/TodoActions";
 
 export class App extends Component {
   componentDidMount = () => {};
@@ -18,19 +19,23 @@ export class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <ListTodos />
+        <ListTodos
+          todos={this.props.todos}
+          fetchTodos={this.props.fetchTodos}
+          createTodo={this.props.createTodo}
+        />
       </div>
     );
   }
 }
 
 App.propTypes = {
-  count: PropTypes.number,
+  fetchTodos: PropTypes.func,
   dispatch: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-  count: state.count
-});
+function mapStateToProps(state) {
+  return { todos: state.todos };
+}
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { fetchTodos, createTodo })(App);

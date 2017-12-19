@@ -1,10 +1,43 @@
+import web3 from "../util/web3Util";
+
 import * as types from "../store/actionTypes";
-import { test } from "../services/TodosService";
+import Todos from "../services/TodosService";
+
+const reformatTodos = todos => {
+  const newArr = [];
+  for (let i = 0; i < todos[0].length; i++) {
+    let obj = {};
+    obj.id = todos[0][i].c[0];
+    obj.name = web3.toAscii(todos[1][i]); //convert byte32 to string
+    obj.complete = todos[2][i];
+    newArr.push(obj);
+  }
+  return newArr;
+};
+
+export const todosSuccess = data => {
+  return {
+    type: types.TODOS_SUCCESS,
+    payload: data
+  };
+};
 
 export const fetchTodos = () => {
-  console.log("1111111");
-  test();
-  return dispatch => {
-    console.log("222222");
+  return async dispatch => {
+    try {
+      const todos = await Todos.getAllTodos();
+      const todosArr = reformatTodos(todos);
+      dispatch(todosSuccess(todosArr));
+    } catch (error) {}
+  };
+};
+
+export const createTodo = title => {
+  return async dispatch => {
+    try {
+      const todos = await Todos.createTodo(title);
+      const todosArr = reformatTodos(todos);
+      dispatch(todosSuccess(todosArr));
+    } catch (error) {}
   };
 };
