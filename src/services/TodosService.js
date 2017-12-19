@@ -1,8 +1,7 @@
-import web3 from "../util/web3Util";
+import { web3 } from "../util/web3Util";
 import contract from "truffle-contract";
 import Todo from "../ethereum/build/contracts/TodoList.json";
 
-web3.eth.defaultAccount = web3.eth.accounts[0];
 const TodoContract = contract(Todo);
 TodoContract.setProvider(web3.currentProvider);
 

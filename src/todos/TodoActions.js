@@ -1,4 +1,4 @@
-import web3 from "../util/web3Util";
+import { web3 } from "../util/web3Util";
 
 import * as types from "../store/actionTypes";
 import Todos from "../services/TodosService";
