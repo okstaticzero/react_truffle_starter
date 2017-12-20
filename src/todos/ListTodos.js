@@ -20,7 +20,10 @@ export class ListTodos extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount = () => {
-    this.props.fetchTodos();
+    const _this = this;
+    setTimeout(() => {
+      _this.props.fetchTodos();
+    }, 500);
   };
   handleSubmit = e => {
     e.preventDefault();

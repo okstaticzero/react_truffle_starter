@@ -12,15 +12,19 @@ class Todos {
   }
 
   async getAllTodos() {
-    //Todo find better way to get the instance
     const instance = await this.getInstance();
     const items = await instance.getAllItems();
     return items;
   }
   async createTodo(name) {
+    console.log("A");
     const instance = await this.getInstance();
+    console.log("B");
     const item = await instance.createItem(name);
+    console.log("C");
     const items = await instance.getAllItems();
+    console.log("D ", items);
+
     return items;
   }
   async markComplete(id) {

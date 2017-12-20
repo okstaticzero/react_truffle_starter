@@ -3,18 +3,14 @@ import Web3 from "web3";
 let provider = window.web3;
 
 if (typeof provider !== "undefined") {
+  console.log("web 3 using current provider");
   provider = new Web3(provider.currentProvider);
 } else {
   provider = new Web3.providers.HttpProvider("http://localhost:7545");
 }
+//get accounts, then set default account
+provider.eth.getAccounts(function(err, res) {
+  provider.eth.defaultAccount = res[0];
+});
 
-provider.eth.defaultAccount = provider.eth.accounts[0];
-console.log("accounts: ", provider.eth.accounts[0]);
-export const web3 = new Web3(provider);
-
-/*
-provider.eth.defaultAccount = provider.eth.accounts[0];
-export const ethereumClient = new Web3(
-  new Web3.providers.HttpProvider('https://37d3d7e0.ngrok.io')
-);
-*/
+export const web3 = provider;
