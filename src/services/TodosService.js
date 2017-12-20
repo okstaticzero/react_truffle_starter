@@ -1,8 +1,7 @@
-import web3 from "../util/web3Util";
-import contract from "truffle-contract";
-import Todo from "../ethereum/build/contracts/TodoList.json";
+import { web3 } from '../util/web3Util';
+import contract from 'truffle-contract';
+import Todo from '../ethereum/build/contracts/TodoList.json';
 
-web3.eth.defaultAccount = web3.eth.accounts[0];
 const TodoContract = contract(Todo);
 TodoContract.setProvider(web3.currentProvider);
 
@@ -13,15 +12,17 @@ class Todos {
   }
 
   async getAllTodos() {
-    //Todo find better way to get the instance
     const instance = await this.getInstance();
-    const items = await instance.getAllItems();
+    const items = await instance.getAllItems.call();
     return items;
   }
   async createTodo(name) {
     const instance = await this.getInstance();
     const item = await instance.createItem(name);
-    const items = await instance.getAllItems();
+    console.log('C: ', item);
+    const items = await this.getAllTodos();
+    console.log('D ', items);
+
     return items;
   }
   async markComplete(id) {

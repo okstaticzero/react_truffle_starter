@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Avatar,
@@ -10,17 +10,20 @@ import {
   Switch,
   FontIcon,
   TextField,
-  Button
-} from "react-md";
+  Button,
+} from 'react-md';
 
 export class ListTodos extends Component {
   constructor(props) {
     super(props);
-    this.state = { newTodo: "" };
+    this.state = { newTodo: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount = () => {
-    this.props.fetchTodos();
+    const _this = this;
+    setTimeout(() => {
+      _this.props.fetchTodos();
+    }, 500);
   };
   handleSubmit = e => {
     e.preventDefault();

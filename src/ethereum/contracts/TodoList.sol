@@ -15,6 +15,7 @@ contract TodoList {
         Item memory newItem = Item(numberOfItems, _itemName, false);
         itemContainer[numberOfItems] = newItem;
         numberOfItems = numberOfItems + 1;
+        return;
     }
     
     function getAllItems() public view returns(uint[], bytes32[], bool[]) {

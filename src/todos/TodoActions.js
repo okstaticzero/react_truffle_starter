@@ -1,7 +1,7 @@
-import web3 from "../util/web3Util";
+import { web3 } from '../util/web3Util';
 
-import * as types from "../store/actionTypes";
-import Todos from "../services/TodosService";
+import * as types from '../store/actionTypes';
+import Todos from '../services/TodosService';
 
 const reformatTodos = todos => {
   const newArr = [];
@@ -18,7 +18,7 @@ const reformatTodos = todos => {
 export const todosSuccess = data => {
   return {
     type: types.TODOS_SUCCESS,
-    payload: data
+    payload: data,
   };
 };
 

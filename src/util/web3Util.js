@@ -1,10 +1,16 @@
-import Web3 from "web3";
+import Web3 from 'web3';
 
-let web3;
-if (typeof web3 !== "undefined") {
-  // Use Mist/MetaMask's provider.
-  web3 = new Web3(web3.currentProvider);
+let provider = window.web3;
+
+if (typeof provider !== 'undefined') {
+  console.log('web 3 using current provider');
+  provider = new Web3(provider.currentProvider);
 } else {
-  web3 = new Web3.providers.HttpProvider("http://localhost:7545");
+  provider = new Web3.providers.HttpProvider('http://localhost:7545');
 }
-export default new Web3(web3);
+//get accounts, then set default account
+provider.eth.getAccounts(function(err, res) {
+  provider.eth.defaultAccount = res[0];
+});
+
+export const web3 = provider;
