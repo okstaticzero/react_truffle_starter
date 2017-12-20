@@ -1,12 +1,12 @@
 # Overview
 
 This project is a boilerplate to quickly get started building DApps (Distributed Applications).
-Tools used: 
+#### Tools used: 
 `React` (Based on Create-react-app: https://github.com/facebookincubator/create-react-app)
-`Redux` for state management https://redux.js.org/
-`Truffle` For contract compiling/migrating http://truffleframework.com/
+<br/>`Redux` for state management https://redux.js.org/
+<br/>`Truffle` For contract compiling/migrating http://truffleframework.com/
 `web3` To allow you to interact with a local or remote ethereum node, using a HTTP or IPC connection. https://github.com/ethereum/wiki/wiki/JavaScript-API
-`truffle-contract` To make it easier to work with your contracts. https://github.com/trufflesuite/truffle-contract
+<br/>`truffle-contract` To make it easier to work with your contracts. https://github.com/trufflesuite/truffle-contract
 
 ## Development Setup
 * Install truffle globally using: `npm install -g truffle`
