@@ -13,16 +13,15 @@ class Todos {
 
   async getAllTodos() {
     const instance = await this.getInstance();
-    const items = await instance.getAllItems();
+    const items = await instance.getAllItems.call();
     return items;
   }
   async createTodo(name) {
-    console.log("A");
     const instance = await this.getInstance();
-    console.log("B");
     const item = await instance.createItem(name);
-    console.log("C");
-    const items = await instance.getAllItems();
+    console.log("C: ", item);
+    await delay(2000);
+    const items = await this.getAllTodos();
     console.log("D ", items);
 
     return items;
@@ -33,5 +32,11 @@ class Todos {
     return;
   }
 }
+
+const delay = t => {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, t);
+  });
+};
 
 export default new Todos();
