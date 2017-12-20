@@ -20,7 +20,6 @@ class Todos {
     const instance = await this.getInstance();
     const item = await instance.createItem(name);
     console.log("C: ", item);
-    await delay(2000);
     const items = await this.getAllTodos();
     console.log("D ", items);
 
@@ -32,11 +31,5 @@ class Todos {
     return;
   }
 }
-
-const delay = t => {
-  return new Promise(function(resolve) {
-    setTimeout(resolve, t);
-  });
-};
 
 export default new Todos();
