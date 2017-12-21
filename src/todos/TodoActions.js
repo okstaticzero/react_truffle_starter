@@ -21,23 +21,34 @@ export const todosSuccess = data => {
     payload: data
   };
 };
-
+export const showPreloader = (bool) => {
+  return {
+    type: types.SHOW_PRELOADER,
+    payload: bool
+  };
+};
 export const fetchTodos = () => {
   return async dispatch => {
+    dispatch(showPreloader(true));
     try {
       const todos = await Todos.getAllTodos();
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(showPreloader(false));
+    }
   };
 };
 
 export const createTodo = title => {
   return async dispatch => {
+    dispatch(showPreloader(true));
     try {
       const todos = await Todos.createTodo(title);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(showPreloader(false));
+    }
   };
 };

@@ -1,19 +1,33 @@
 @import '../variables';
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 60px; 
 }
 
+.Eth-logo {
+  height: 120px
+}
+.logo-container{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 50px;
+}
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 100px;
   padding: 20px;
   color: $white;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: left;
 
   & > h2 {
     color: $white;
+    font-size: 18px;
+    margin-top: 14px;
+    margin-left: 30px;
   }
 }
 
