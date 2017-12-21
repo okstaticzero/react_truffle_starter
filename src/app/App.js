@@ -1,13 +1,12 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { Card, CardText, CardTitle } from "react-md/lib/Cards";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.svg";
-import "./App.css";
-import ListTodos from "../todos/ListTodos";
-import "material-design-icons/iconfont/material-icons.css";
-import { fetchTodos, createTodo } from "../todos/TodoActions";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import logo from '../assets/images/logo.svg';
+import ListTodos from '../todos/ListTodos';
+import 'material-design-icons/iconfont/material-icons.css';
+
+import './App.css';
+import { fetchTodos, createTodo, toggleComplete } from '../todos/TodoActions';
 
 export class App extends Component {
   componentDidMount = () => {};
@@ -23,6 +22,7 @@ export class App extends Component {
           todos={this.props.todos}
           fetchTodos={this.props.fetchTodos}
           createTodo={this.props.createTodo}
+          toggleComplete={this.props.toggleComplete}
         />
       </div>
     );
@@ -31,11 +31,15 @@ export class App extends Component {
 
 App.propTypes = {
   fetchTodos: PropTypes.func,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
 };
 
 function mapStateToProps(state) {
   return { todos: state.todos };
 }
 
-export default connect(mapStateToProps, { fetchTodos, createTodo })(App);
+export default connect(mapStateToProps, {
+  fetchTodos,
+  createTodo,
+  toggleComplete,
+})(App);
