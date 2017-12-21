@@ -7,7 +7,7 @@ import eth_logo from "../assets/images/eth_logo.png";
 import "./App.css";
 import ListTodos from "../todos/ListTodos";
 import "material-design-icons/iconfont/material-icons.css";
-import { fetchTodos, createTodo toggleComplete } from "../todos/TodoActions";
+import { fetchTodos, createTodo, toggleComplete } from "../todos/TodoActions";
 
 export class App extends Component {
   componentDidMount = () => { };
