@@ -41,3 +41,15 @@ export const createTodo = title => {
     } catch (error) {}
   };
 };
+
+export const toggleComplete = id => {
+  return async dispatch => {
+    try {
+      const todos = await Todos.markComplete(id);
+      const todosArr = reformatTodos(todos);
+      dispatch(todosSuccess(todosArr));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

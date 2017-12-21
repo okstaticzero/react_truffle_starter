@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Avatar,
-  List,
-  ListItem,
-  ListItemControl,
-  Checkbox,
-  Switch,
-  FontIcon,
-  TextField,
-  Button,
-} from 'react-md';
+import { List, ListItemControl, Checkbox, TextField, Button } from 'react-md';
 
 export class ListTodos extends Component {
   constructor(props) {
     super(props);
+
     this.state = { newTodo: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleComplete = this.toggleComplete.bind(this);
   }
+
   componentDidMount = () => {
-    const _this = this;
-    setTimeout(() => {
-      _this.props.fetchTodos();
-    }, 500);
+    this.props.fetchTodos();
   };
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.createTodo(this.state.newTodo);
+    this.setState({ newTodo: '' });
   };
-  render() {
-    // console.log("HUH: ", this.props.todos);
 
+  toggleComplete = id => {
+    this.props.toggleComplete(id);
+  };
+
+  render() {
     return (
       <div>
         <List className="Todo-list">
@@ -40,10 +35,13 @@ export class ListTodos extends Component {
               key={index}
               primaryAction={
                 <Checkbox
-                  id={`list-control-chat-${index}`}
+                  id={index}
                   name="list-control-primary"
                   label={todo.name}
                   defaultChecked={todo.completed}
+                  onChange={(todo, e) =>
+                    this.toggleComplete(Number(e.target.id))
+                  }
                 />
               }
             />
