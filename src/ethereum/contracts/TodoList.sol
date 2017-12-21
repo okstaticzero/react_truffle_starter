@@ -33,8 +33,12 @@ contract TodoList {
         return (ids, titles, complete);
     }
        
-    function markComplete(uint id) public payable {
-        itemContainer[id].completed = true;
-    }
+       function markComplete(uint id) public payable {
+            if (itemContainer[id].completed) {
+                itemContainer[id].completed = false;
+            } else {
+                itemContainer[id].completed = true;
+            }
+        }
     
 }

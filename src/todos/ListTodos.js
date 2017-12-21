@@ -18,22 +18,27 @@ import {
 export class ListTodos extends Component {
   constructor(props) {
     super(props);
-    this.state = { newTodo: "" };
+
+    this.state = { newTodo: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleComplete = this.toggleComplete.bind(this);
   }
+
   componentDidMount = () => {
-    const _this = this;
-    setTimeout(() => {
-      _this.props.fetchTodos();
-    }, 500);
+    this.props.fetchTodos();
   };
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.createTodo(this.state.newTodo);
+    this.setState({ newTodo: '' });
   };
-  render() {
-    // console.log("HUH: ", this.props.todos);
 
+  toggleComplete = id => {
+    this.props.toggleComplete(id);
+  };
+
+  render() {
     return (
       <Card>
         <List className="Todo-list">
@@ -42,11 +47,13 @@ export class ListTodos extends Component {
               key={index}
               primaryAction={
                 <Checkbox
-                  id={`list-control-chat-${index}`}
+                  id={index}
                   name="list-control-primary"
                   label={todo.name}
                   defaultChecked={todo.completed}
-                  onChange={(todo, e) => console.log(todo, e.target.id)}
+                  onChange={(todo, e) =>
+                    this.toggleComplete(Number(e.target.id))
+                  }
                 />
               }
             />
