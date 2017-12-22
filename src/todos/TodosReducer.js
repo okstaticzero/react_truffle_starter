@@ -1,6 +1,7 @@
 import * as types from "../store/actionTypes";
 
 const initialState = { loading: false, todoList: [] }
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.TODOS_SUCCESS:

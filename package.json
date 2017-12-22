@@ -39,7 +39,6 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "lint": "eslint src/**/*.js",
     "lint:watch": "esw -w src/**/*.js",
-    "precommit": "lint-staged",
     "start-js": "react-scripts start",
     "test:once": "npm rebuild node-sass && yarn build-css && CI=true react-scripts test src/**/* --env=jsdom",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
@@ -51,11 +50,5 @@
     "prettier": "^1.2.2",
     "react-addons-test-utils": "^15.6.0",
     "web3": "^0.20.1"
-  },
-  "lint-staged": {
-    "{src,__{test|mocks}__}/**/*.js": [
-      "prettier --single-quote --trailing-comma es5 --write",
-      "git add"
-    ]
   }
 }
