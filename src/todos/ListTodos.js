@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import ripple from "../assets/images/ripple.svg";
-import "./Todos.css";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import ripple from '../assets/images/ripple.svg';
+import './Todos.css';
 import {
   Avatar,
   List,
@@ -12,8 +12,8 @@ import {
   Switch,
   FontIcon,
   TextField,
-  Button
-} from "react-md";
+  Button,
+} from 'react-md';
 
 export class ListTodos extends Component {
   constructor(props) {
@@ -67,15 +67,22 @@ export class ListTodos extends Component {
                 lineDirection="center"
                 placeholder="Hello World"
                 className="md-cell md-cell--bottom"
+                value={this.state.newTodo}
                 onChange={name => this.setState({ newTodo: name })}
               />
-              {this.props.todos.loading ?
-                <div className="preloader"><img src={ripple} className="ripple" alt="logo" /><p>Waiting for transaction to complete. <br />This may take a few seconds.</p></div>
-                :
+              {this.props.todos.loading ? (
+                <div className="preloader">
+                  <img src={ripple} className="ripple" alt="logo" />
+                  <p>
+                    Waiting for transaction to complete. <br />This may take a
+                    few seconds.
+                  </p>
+                </div>
+              ) : (
                 <Button type="submit" raised secondary swapTheming>
                   Add Todo
                 </Button>
-              }
+              )}
             </form>
           </div>
         </Card>
