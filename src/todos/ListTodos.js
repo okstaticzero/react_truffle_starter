@@ -87,5 +87,9 @@ export class ListTodos extends Component {
   }
 }
 
-ListTodos.propTypes = {};
+ListTodos.propTypes = {
+  createTodo: PropTypes.func,
+  toggleComplete: PropTypes.func,
+};
+
 export default ListTodos;
