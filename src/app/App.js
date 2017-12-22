@@ -19,7 +19,7 @@ export class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <img src={eth_logo} className="Eth-logo" alt="logo" />
           </div>
-          <h2>Welocome to Todo DApp</h2>
+          <h2>Welcome to Todo DApp</h2>
         </div>
         <ListTodos
           todos={this.props.todos}

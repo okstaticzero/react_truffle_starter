@@ -75,7 +75,7 @@ export class ListTodos extends Component {
                   </p>
                 </div>
               ) : (
-                <Button type="submit" raised secondary swapTheming>
+                <Button type="submit" raised primary swapTheming>
                   Add Todo
                 </Button>
               )}
