@@ -3,14 +3,10 @@ import PropTypes from 'prop-types';
 import ripple from '../assets/images/ripple.svg';
 import './Todos.css';
 import {
-  Avatar,
   List,
-  ListItem,
   Card,
   ListItemControl,
   Checkbox,
-  Switch,
-  FontIcon,
   TextField,
   Button,
 } from 'react-md';
