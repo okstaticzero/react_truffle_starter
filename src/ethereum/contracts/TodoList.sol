@@ -11,11 +11,10 @@ contract TodoList {
     uint public numberOfItems = 0;
     mapping(uint => Item) itemContainer;
     
-    function createItem(bytes32 _itemName) public payable {
+    function createItem(bytes32 _itemName) public payable  {
         Item memory newItem = Item(numberOfItems, _itemName, false);
         itemContainer[numberOfItems] = newItem;
         numberOfItems = numberOfItems + 1;
-        return;
     }
     
     function getAllItems() public view returns(uint[], bytes32[], bool[]) {
