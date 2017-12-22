@@ -5,7 +5,6 @@ import Todos from '../services/TodosService';
 
 const reformatTodos = todos => {
   const newArr = [];
-  console.log('new array: ', todos);
   for (let i = 0; i < todos[0].length; i++) {
     let obj = {};
     obj.id = todos[0][i].c[0];
@@ -13,8 +12,6 @@ const reformatTodos = todos => {
     obj.complete = todos[2][i];
     newArr.push(obj);
   }
-
-
   return newArr;
 };
 
@@ -24,12 +21,14 @@ export const todosSuccess = data => {
     payload: data,
   };
 };
+
 export const showPreloader = (bool) => {
   return {
     type: types.SHOW_PRELOADER,
     payload: bool
   };
 };
+
 export const fetchTodos = () => {
   return async dispatch => {
     dispatch(showPreloader(true));

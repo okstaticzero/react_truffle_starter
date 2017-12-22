@@ -19,14 +19,14 @@ class Todos {
 
   async createTodo(name) {
     const instance = await this.getInstance();
-    const item = await instance.createItem(name);
+    await instance.createItem(name);
     const items = await this.getAllTodos();
     return items;
   }
 
   async markComplete(id) {
     const instance = await this.getInstance();
-    const item = await instance.markComplete(id);
+    await instance.markComplete(id);
     const items = await this.getAllTodos();
     return items;
   }
