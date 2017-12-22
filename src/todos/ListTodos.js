@@ -25,6 +25,7 @@ export class ListTodos extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    if (this.state.newTodo === '') return;
     this.props.createTodo(this.state.newTodo);
     this.setState({ newTodo: '' });
   };
