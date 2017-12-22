@@ -57,12 +57,13 @@ export const createTodo = title => {
 
 export const toggleComplete = id => {
   return async dispatch => {
+    dispatch(showPreloader(true));
     try {
       const todos = await Todos.markComplete(id);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
     } catch (err) {
-      console.log(err);
+      dispatch(showPreloader(false));
     }
   };
 };
