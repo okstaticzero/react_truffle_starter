@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ripple from '../assets/images/ripple.svg';
+import { connect } from 'react-redux';
+import { fetchTodos, createTodo, toggleComplete } from '../todos/TodoActions';
 import './Todos.css';
 import {
   List,
@@ -19,18 +21,19 @@ export class ListTodos extends Component {
     this.toggleComplete = this.toggleComplete.bind(this);
   }
 
-  componentDidMount = () => {
-    this.props.fetchTodos();
+  componentDidMount(e) {
+    const account = this.props.match.params.account;
+    this.props.fetchTodos(account);
   };
 
-  handleSubmit = e => {
+  handleSubmit(e) {
     e.preventDefault();
     if (this.state.newTodo === '') return;
     this.props.createTodo(this.state.newTodo);
     this.setState({ newTodo: '' });
   };
 
-  toggleComplete = id => {
+  toggleComplete(id) {
     this.props.toggleComplete(id);
   };
 
@@ -38,6 +41,7 @@ export class ListTodos extends Component {
     return (
       <div className="Todo-list">
         <Card className="Todos-card">
+          <h4>Todo Account: {this.props.match.params.account}</h4>
           <List>
             {this.props.todos.todoList.map((todo, index) => (
               <ListItemControl
@@ -67,7 +71,7 @@ export class ListTodos extends Component {
                 value={this.state.newTodo}
                 onChange={name => this.setState({ newTodo: name })}
               />
-              {this.props.todos.loading ? (
+              {this.props.loading ? (
                 <div className="preloader">
                   <img src={ripple} className="ripple" alt="logo" />
                   <p>
@@ -76,10 +80,10 @@ export class ListTodos extends Component {
                   </p>
                 </div>
               ) : (
-                <Button type="submit" raised primary swapTheming>
-                  Add Todo
+                  <Button type="submit" raised primary swapTheming>
+                    Add Todo
                 </Button>
-              )}
+                )}
             </form>
           </div>
         </Card>
@@ -90,7 +94,23 @@ export class ListTodos extends Component {
 
 ListTodos.propTypes = {
   createTodo: PropTypes.func,
+  fetchTodos: PropTypes.func,
   toggleComplete: PropTypes.func,
+  match: PropTypes.object,
+  loading: PropTypes.string,
+  todos: PropTypes.object,
 };
 
-export default ListTodos;
+function mapStateToProps(state) {
+  return {
+    todos: state.todos,
+    loading: state.loadingState.loading
+  };
+}
+
+export default connect(mapStateToProps, {
+  fetchTodos,
+  createTodo,
+  toggleComplete,
+})(ListTodos);
+

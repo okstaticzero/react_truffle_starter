@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Route } from 'react-router';
 import logo from '../assets/images/logo.svg';
 import eth_logo from '../assets/images/eth_logo.png';
 import './App.css';
 import ListTodos from '../todos/ListTodos';
+import Accounts from '../accounts/Accounts';
 import 'material-design-icons/iconfont/material-icons.css';
 import { fetchTodos, createTodo, toggleComplete } from '../todos/TodoActions';
 
 export class App extends Component {
-  componentDidMount = () => {};
-
   render() {
     return (
       <div className="App">
@@ -21,12 +22,10 @@ export class App extends Component {
           </div>
           <h2>Welcome to Todo DApp</h2>
         </div>
-        <ListTodos
-          todos={this.props.todos}
-          fetchTodos={this.props.fetchTodos}
-          createTodo={this.props.createTodo}
-          toggleComplete={this.props.toggleComplete}
-        />
+
+        <Route exact path="/" component={Accounts} />
+        <Route path="/todos/:account" component={ListTodos} />
+
       </div>
     );
   }
@@ -38,11 +37,14 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { todos: state.todos };
+  return {
+    todos: state.todos,
+    loading: state.loadingState.loading
+  };
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   fetchTodos,
   createTodo,
   toggleComplete,
-})(App);
+})(App));

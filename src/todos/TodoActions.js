@@ -29,13 +29,14 @@ export const showPreloader = (bool) => {
   };
 };
 
-export const fetchTodos = () => {
+export const fetchTodos = (account) => {
   return async dispatch => {
     dispatch(showPreloader(true));
     try {
-      const todos = await Todos.getAllTodos();
+      const todos = await Todos.getMyData(account);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
+      dispatch(showPreloader(false));
     } catch (error) {
       dispatch(showPreloader(false));
     }
@@ -49,6 +50,7 @@ export const createTodo = title => {
       const todos = await Todos.createTodo(title);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
+      dispatch(showPreloader(false));
     } catch (error) {
       dispatch(showPreloader(false));
     }

@@ -34,7 +34,6 @@ contract('TodoList', function () {
         let x = await todo.createItem(itemName);//create item
         let arrays = await todo.getAllItems();//get Items
         let expected = web3.fromAscii(itemName)//convert string to bytes
-        console.log('expected: ', expected)
         const firstItemName = arrays[1][0]; // get name of first item (stored as byte32)
         const actual = firstItemName.substring(0, expected.length)// get name of first item and trim to same length (removes trailing zeros)
         assert.equal(actual, expected)

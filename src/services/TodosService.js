@@ -11,16 +11,28 @@ class Todos {
     return instance;
   }
 
-  async getAllTodos() {
+  async getAllUsers() {
     const instance = await this.getInstance();
-    const items = await instance.getAllItems.call();
+    const items = await instance.getAllUsers();
     return items;
+  }
+
+  async getMyData(account) {
+    const instance = await this.getInstance();
+    const items = await instance.getMyData(account);
+    return items;
+  }
+
+  async createAccount(name) {
+    const instance = await this.getInstance();
+    const item = await instance.createAccount(name);
+    return item.receipt.from;
   }
 
   async createTodo(name) {
     const instance = await this.getInstance();
-    await instance.createItem(name);
-    const items = await this.getAllTodos();
+    const resp = await instance.addTodo(name);
+    const items = await this.getMyData(resp.receipt.from);
     return items;
   }
 
