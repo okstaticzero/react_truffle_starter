@@ -69,7 +69,7 @@ Accounts.propTypes = {
     getAllUsers: PropTypes.func,
     createAccount: PropTypes.func,
     accounts: PropTypes.object,
-    loading: PropTypes.string
+    loading: PropTypes.bool
 }
 
 function mapStateToProps(state) {

@@ -97,7 +97,7 @@ ListTodos.propTypes = {
   fetchTodos: PropTypes.func,
   toggleComplete: PropTypes.func,
   match: PropTypes.object,
-  loading: PropTypes.string,
+  loading: PropTypes.bool,
   todos: PropTypes.object,
 };
 
