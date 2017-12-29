@@ -36,9 +36,9 @@ class Todos {
     return items;
   }
 
-  async markComplete(id) {
+  async toggleComplete(account, id) {
     const instance = await this.getInstance();
-    await instance.markComplete(id);
+    await instance.toggleComplete(account, id);
     const items = await this.getAllTodos();
     return items;
   }

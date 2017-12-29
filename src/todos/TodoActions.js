@@ -57,11 +57,11 @@ export const createTodo = title => {
   };
 };
 
-export const toggleComplete = id => {
+export const toggleComplete = (account, id) => {
   return async dispatch => {
     dispatch(showPreloader(true));
     try {
-      const todos = await Todos.markComplete(id);
+      const todos = await Todos.toggleComplete(account, id);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
     } catch (err) {

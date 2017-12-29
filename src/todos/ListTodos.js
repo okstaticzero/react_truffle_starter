@@ -16,13 +16,14 @@ import {
 export class ListTodos extends Component {
   constructor(props) {
     super(props);
-    this.state = { newTodo: '' };
+    this.state = { newTodo: '', account: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
   }
 
   componentDidMount(e) {
     const account = this.props.match.params.account;
+    this.setState({ account: account });
     this.props.fetchTodos(account);
   };
 
@@ -34,7 +35,8 @@ export class ListTodos extends Component {
   };
 
   toggleComplete(id) {
-    this.props.toggleComplete(id);
+    const account = this.state.account;
+    this.props.toggleComplete(account, id);
   };
 
   render() {

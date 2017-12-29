@@ -61,4 +61,15 @@ contract TodoList {
         todo.name = _todo;
         user.todoCount ++;
     }
+    
+    function toggleComplete(address _account, uint _id) public payable {
+         var user = users[_account];
+         
+        if (user.todoMap[_id].completed) {
+                user.todoMap[_id].completed = false;
+            } else {
+                user.todoMap[_id].completed = true;
+            }
+        }
+
 }
