@@ -10,6 +10,7 @@ import {
     TextField,
     Button,
 } from 'react-md';
+import { uport, web3, MNID } from "../util/Uport";
 
 export class Accounts extends Component {
     constructor(props) {
@@ -17,8 +18,20 @@ export class Accounts extends Component {
         this.state = { newAccount: '' };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentDidMount() {
-        this.props.getAllUsers();
+    async componentDidMount() {
+        // this.props.getAllUsers();
+
+        const userProfile = await uport.requestCredentials({
+            requested: ['name', 'country', 'avatar'],
+            notifications: true // We want this if we want to recieve credentials
+        })
+        // Do something
+        const decodedId = MNID.decode(userProfile.address)
+        const specificNetworkAddress = decodedId.address
+        console.log('contact: ', userProfile);
+        console.log('specificNetworkAddressL ', specificNetworkAddress);
+        this.props.createAccount("Matt Test", specificNetworkAddress);
+
     };
     handleSubmit(e) {
         e.preventDefault();

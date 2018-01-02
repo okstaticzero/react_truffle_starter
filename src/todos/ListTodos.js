@@ -30,7 +30,7 @@ export class ListTodos extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.newTodo === '') return;
-    this.props.createTodo(this.state.newTodo);
+    this.props.createTodo(this.state.newTodo, this.state.account);
     this.setState({ newTodo: '' });
   };
 

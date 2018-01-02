@@ -21,7 +21,7 @@ contract TodoList {
     
     //note: setUser must be called before adding todos
     function createAccount(string _name) public {
-        if(users[msg.sender].id != 0){
+        if (users[msg.sender].id != 0) {
             return; //if already set, don't set store again
         }
         var user = users[msg.sender];
@@ -54,8 +54,8 @@ contract TodoList {
         return (ids, titles, complete);
     }
     
-    function addTodo(bytes32 _todo) public {
-        var user = users[msg.sender];
+    function addTodo(bytes32 _todo, address _account) public {
+        var user = users[_account];
         Todo memory todo = Todo(user.todoCount, _todo, false);
         user.todoMap[user.todoCount] = todo;
         todo.name = _todo;

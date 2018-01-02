@@ -43,11 +43,11 @@ export const fetchTodos = (account) => {
   };
 };
 
-export const createTodo = title => {
+export const createTodo = (title, account) => {
   return async dispatch => {
     dispatch(showPreloader(true));
     try {
-      const todos = await Todos.createTodo(title);
+      const todos = await Todos.createTodo(title, account);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
       dispatch(showPreloader(false));

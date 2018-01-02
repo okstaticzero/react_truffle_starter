@@ -36,13 +36,19 @@ export const accountSuccess = (account) => {
   };
 };
 
-export const createAccount = title => {
+export const createAccount = (title, specificNetworkAddress) => {
   return async dispatch => {
     dispatch(showPreloader(true));
     try {
-      const account = await Todos.createAccount(title);
-      //dispatch(accountSuccess(account));
+      console.log('111111');
+      dispatch(accountSuccess(specificNetworkAddress));
+      const account = await Todos.createAccount(title, specificNetworkAddress);
+
+      console.log('createAccount: ' + title);
+
       dispatch(push(`/todos/${account}`));
+      console.log('333333');
+
       dispatch(showPreloader(false));
     } catch (error) {
       dispatch(showPreloader(false));
