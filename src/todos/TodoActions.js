@@ -29,37 +29,39 @@ export const showPreloader = (bool) => {
   };
 };
 
-export const fetchTodos = () => {
+export const fetchTodos = (account) => {
   return async dispatch => {
     dispatch(showPreloader(true));
     try {
-      const todos = await Todos.getAllTodos();
+      const todos = await Todos.getMyData(account);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
+      dispatch(showPreloader(false));
     } catch (error) {
       dispatch(showPreloader(false));
     }
   };
 };
 
-export const createTodo = title => {
+export const createTodo = (title, account, userAddress) => {
   return async dispatch => {
     dispatch(showPreloader(true));
     try {
-      const todos = await Todos.createTodo(title);
+      const todos = await Todos.createTodo(title, account, userAddress);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
+      dispatch(showPreloader(false));
     } catch (error) {
       dispatch(showPreloader(false));
     }
   };
 };
 
-export const toggleComplete = id => {
+export const toggleComplete = (account, id) => {
   return async dispatch => {
     dispatch(showPreloader(true));
     try {
-      const todos = await Todos.markComplete(id);
+      const todos = await Todos.toggleComplete(account, id);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
     } catch (err) {

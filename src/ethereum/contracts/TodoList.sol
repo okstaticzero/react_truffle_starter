@@ -1,43 +1,75 @@
 pragma solidity ^0.4.17;
 
+
 contract TodoList {
-    
-    struct Item {
+     struct Todo {
         uint id;
         bytes32 name;
         bool completed;
     }
     
-    uint public numberOfItems = 0;
-    mapping(uint => Item) itemContainer;
+    struct User {
+        string name;
+        uint id;
+        uint todoCount;
+        mapping(uint => Todo) todoMap;
+    }
+
+    mapping (address => User) users;
+    address[] public userAccts;
+    uint count = 1;
     
-    function createItem(bytes32 _itemName) public payable  {
-        Item memory newItem = Item(numberOfItems, _itemName, false);
-        itemContainer[numberOfItems] = newItem;
-        numberOfItems = numberOfItems + 1;
+    //note: setUser must be called before adding todos
+    function createAccount(string _name) public {
+        if (users[msg.sender].id != 0) {
+            return; //if already set, don't set store again
+        }
+        var user = users[msg.sender];
+        user.name = _name;
+        user.todoCount = 0; //keep track of todos for each user
+        user.id = count;
+        count ++;
+        userAccts.push(msg.sender);
     }
     
-    function getAllItems() public view returns(uint[], bytes32[], bool[]) {
-        uint[] memory ids = new uint[](numberOfItems);
-        bytes32[] memory titles = new bytes32[](numberOfItems);
-        bool[] memory complete = new bool[](numberOfItems);
+    function getAllUsers() view public returns (address[]) {
+        return userAccts;
+    }
+    
+    //returns user name/id and all todos associated with you account
+    function getMyData(address _account) view public returns (uint[], bytes32[], bool[]) {
+        var user = users[_account];
+        var todoCount = user.todoCount;
+        uint[] memory ids = new uint[](todoCount);
+        bool[] memory complete = new bool[](todoCount);
+        bytes32[] memory titles = new bytes32[](todoCount);
         
-        for (uint i = 0; i < numberOfItems; i++) {
-            Item memory currentItem = itemContainer[i];
-            ids[i] = currentItem.id;
-            titles[i] = currentItem.name;
-            complete[i] = currentItem.completed;
-            
+        for (uint i = 0; i < user.todoCount; i++) {
+            Todo memory currentTodo = user.todoMap[i];
+            ids[i] = currentTodo.id;
+            titles[i] = currentTodo.name;
+            complete[i] = currentTodo.completed;
         }
+        
         return (ids, titles, complete);
     }
-       
-       function markComplete(uint id) public payable {
-            if (itemContainer[id].completed) {
-                itemContainer[id].completed = false;
+    
+    function addTodo(bytes32 _todo, address _account) public {
+        var user = users[_account];
+        Todo memory todo = Todo(user.todoCount, _todo, false);
+        user.todoMap[user.todoCount] = todo;
+        todo.name = _todo;
+        user.todoCount ++;
+    }
+    
+    function toggleComplete(address _account, uint _id) public payable {
+         var user = users[_account];
+         
+        if (user.todoMap[_id].completed) {
+                user.todoMap[_id].completed = false;
             } else {
-                itemContainer[id].completed = true;
+                user.todoMap[_id].completed = true;
             }
         }
-    
+
 }

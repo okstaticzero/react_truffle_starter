@@ -1,0 +1,22 @@
+.Account-list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.Accounts-card{
+  padding: 20px
+}
+.preloader{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100px;
+    p{
+      margin-bottom: 0;
+    }
+  }
+
+  .account-link{
+    display: block;
+  }
