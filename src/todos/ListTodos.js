@@ -36,7 +36,7 @@ export class ListTodos extends Component {
 
   toggleComplete(id) {
     const account = this.state.account;
-    this.props.toggleComplete(account, id);
+    this.props.toggleComplete(account, id, this.props.account);
   };
 
   render() {

@@ -26,7 +26,7 @@ export class Accounts extends Component {
                 {this.props.loading ? (
                     <div className="preloader">
                         <img src={ripple} className="ripple" alt="logo" />
-                        Waiting for transaction to complete. <br />This may take a
+                        Check the uPort app on your mobile phone to approve transaction. <br />This may take a
       few seconds.
 
                     </div>

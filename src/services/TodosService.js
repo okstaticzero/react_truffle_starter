@@ -28,9 +28,9 @@ class Todos {
     return items;
   }
 
-  async createAccount(name, specificNetworkAddress) {
+  async createAccount(name, userAddress) {
     const instance = await this.getInstance();
-    const item = await instance.createAccount(name, { from: specificNetworkAddress });
+    const item = await instance.createAccount(name, { from: userAddress });
     return item.receipt.from;
 
   }
@@ -42,9 +42,9 @@ class Todos {
     return items;
   }
 
-  async toggleComplete(account, id) {
+  async toggleComplete(account, id, userAddress) {
     const instance = await this.getInstance();
-    await instance.toggleComplete(account, id);
+    await instance.toggleComplete(account, id, { from: userAddress });
     const items = await this.getAllTodos();
     return items;
   }
