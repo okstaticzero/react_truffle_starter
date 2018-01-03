@@ -21,6 +21,9 @@ export class App extends Component {
             <img src={eth_logo} className="Eth-logo" alt="logo" />
           </div>
           <h2>Welcome to Todo DApp</h2>
+          {this.props.user &&
+            <img src={this.props.user.avatar.uri} className="avatar" alt="avatar" />
+          }
         </div>
 
         <Route exact path="/" component={Accounts} />
@@ -33,12 +36,13 @@ export class App extends Component {
 
 App.propTypes = {
   fetchTodos: PropTypes.func,
-  dispatch: PropTypes.func,
+  dispatch: PropTypes.func
 };
 
 function mapStateToProps(state) {
   return {
     todos: state.todos,
+    user: state.accounts.currentUser,
     loading: state.loadingState.loading
   };
 }

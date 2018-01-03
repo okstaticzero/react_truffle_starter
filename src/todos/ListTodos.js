@@ -30,7 +30,7 @@ export class ListTodos extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.newTodo === '') return;
-    this.props.createTodo(this.state.newTodo, this.state.account);
+    this.props.createTodo(this.state.newTodo, this.state.account, this.props.account);
     this.setState({ newTodo: '' });
   };
 
@@ -43,7 +43,7 @@ export class ListTodos extends Component {
     return (
       <div className="Todo-list">
         <Card className="Todos-card">
-          <h4>Todo Account: {this.props.match.params.account}</h4>
+          <h4 data-account={this.props.match.params.account}>Account: {this.props.user.name}</h4>
           <List>
             {this.props.todos.todoList.map((todo, index) => (
               <ListItemControl
@@ -106,7 +106,9 @@ ListTodos.propTypes = {
 function mapStateToProps(state) {
   return {
     todos: state.todos,
-    loading: state.loadingState.loading
+    account: state.accounts.account,
+    loading: state.loadingState.loading,
+    user: state.accounts.currentUser
   };
 }
 
