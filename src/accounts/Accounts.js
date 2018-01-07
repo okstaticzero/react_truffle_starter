@@ -23,6 +23,7 @@ export class Accounts extends Component {
     render() {
         return (
             <div className="Account-list">
+                <p>This App uses uPort for identity verification and authentication on the Blockchain. Download the uPort app on your mobile phone to create your identity. <a href="https://www.uport.me/" target="_blank">https://www.uport.me/</a></p><br />
                 {this.props.loading ? (
                     <div className="preloader">
                         <img src={ripple} className="ripple" alt="logo" />
@@ -31,8 +32,8 @@ export class Accounts extends Component {
 
                     </div>
                 ) : (
-                        <form onSubmit={this.handleSubmit}>
-                            <div><Button type="submit" raised primary swapTheming>Login</Button></div>
+                        <form className="login-form" onSubmit={this.handleSubmit}>
+                            <div><Button type="submit" raised primary swapTheming>Verify your identity</Button></div>
                         </form>
                     )
                 }

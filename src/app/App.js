@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Route } from 'react-router';
 import logo from '../assets/images/logo.svg';
 import eth_logo from '../assets/images/eth_logo.png';
+import uport_logo from '../assets/images/uport_logo.png';
 import './App.css';
 import ListTodos from '../todos/ListTodos';
 import Accounts from '../accounts/Accounts';
@@ -19,6 +20,7 @@ export class App extends Component {
           <div className="logo-container">
             <img src={logo} className="App-logo" alt="logo" />
             <img src={eth_logo} className="Eth-logo" alt="logo" />
+            <img src={uport_logo} className="uport-logo" alt="logo" />
           </div>
           <h2>Welcome to Todo DApp</h2>
           {this.props.user &&
