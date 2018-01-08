@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ripple from '../assets/images/ripple.svg';
 import { connect } from 'react-redux';
-import { fetchTodos, createTodo, toggleComplete } from '../todos/TodoActions';
+import { fetchTodos, createTodo, toggleComplete, deleteTodo } from '../todos/TodoActions';
 import './Todos.css';
 import {
   List,
@@ -101,6 +101,7 @@ ListTodos.propTypes = {
   match: PropTypes.object,
   loading: PropTypes.bool,
   todos: PropTypes.object,
+  account: PropTypes.string,
 };
 
 function mapStateToProps(state) {
@@ -116,5 +117,6 @@ export default connect(mapStateToProps, {
   fetchTodos,
   createTodo,
   toggleComplete,
+  deleteTodo
 })(ListTodos);
 

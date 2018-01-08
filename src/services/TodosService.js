@@ -48,6 +48,13 @@ class Todos {
     const items = await this.getAllTodos();
     return items;
   }
+
+  async deleteTodo(account, id, userAddress) {
+    const instance = await this.getInstance();
+    await instance.deleteTodo(account, id, { from: userAddress });
+    const items = await this.getAllTodos();
+    return items;
+  }
 }
 
 export default new Todos();

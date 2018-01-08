@@ -10,20 +10,28 @@ import {
 import { initAccount } from "../util/Uport";
 
 export class Accounts extends Component {
+    
     constructor(props) {
         super(props);
         this.state = { newAccount: '' };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     async handleSubmit(e) {
         e.preventDefault();
         const indentiy = await initAccount();
         this.props.createAccount("Test Account", indentiy.specificNetworkAddress, indentiy.userProfile);
     };
+
     render() {
         return (
             <div className="Account-list">
-                <p>This App uses uPort for identity verification and authentication on the Blockchain. Download the uPort app on your mobile phone to create your identity. <a href="https://www.uport.me/" target="_blank">https://www.uport.me/</a></p><br />
+                <p>This App uses uPort for identity verification and authentication on the Blockchain. 
+                    Download the uPort app on your mobile phone to create your identity. 
+                    <a href="https://www.uport.me/" rel="noopener noreferrer" target="_blank">
+                    https://www.uport.me/</a>
+                </p>
+                    <br />
                 {this.props.loading ? (
                     <div className="preloader">
                         <img src={ripple} className="ripple" alt="logo" />

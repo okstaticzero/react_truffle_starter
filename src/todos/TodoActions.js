@@ -69,3 +69,16 @@ export const toggleComplete = (account, id, userAddress) => {
     }
   };
 };
+
+export const deleteTodo = (account, id, userAddress) => {
+  return async dispatch => {
+    dispatch(showPreloader(true));
+    try {
+      const todos = await Todos.deleteTodo(account, id, userAddress);
+      const todosArr = reformatTodos(todos);
+      dispatch(todosSuccess(todosArr));
+    } catch (err) {
+      dispatch(showPreloader(false));
+    }
+  }
+}

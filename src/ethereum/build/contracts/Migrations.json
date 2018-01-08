@@ -819,14 +819,9 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0x6d91dc367f98493c28b9bc34d6c63cc586aea0c8"
-    },
-    "4447": {
-      "events": {},
-      "links": {},
-      "address": "0x8cdaf0cd259887258bc13a92c0a6da92698644c0"
+      "address": "0x5adfe71741816d69bc7634a1b2f0ed3d298279f9"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-08T18:36:50.415Z"
+  "updatedAt": "2018-01-08T21:30:36.358Z"
 }

@@ -62,10 +62,6 @@
         {
           "name": "_name",
           "type": "string"
-        },
-        {
-          "name": "_account",
-          "type": "address"
         }
       ],
       "name": "createAccount",
@@ -87,20 +83,7 @@
         }
       ],
       "name": "addTodo",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256[]"
-        },
-        {
-          "name": "",
-          "type": "bytes32[]"
-        },
-        {
-          "name": "",
-          "type": "bool[]"
-        }
-      ],
+      "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
@@ -3992,14 +3975,9 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0x285462054eeba5c682beb0d8ac531a0c01eb5dc2"
-    },
-    "4447": {
-      "events": {},
-      "links": {},
-      "address": "0x345ca3e014aaf5dca488057592ee47305d9b3e10"
+      "address": "0x71223f19083d6682e64340aa23bbfe196a9b7579"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-08T18:36:50.421Z"
+  "updatedAt": "2018-01-08T21:30:36.354Z"
 }
