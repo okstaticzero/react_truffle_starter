@@ -71,5 +71,12 @@ contract TodoList {
                 user.todoMap[_id].completed = true;
             }
         }
+            
+    function deleteTodo (address _account, uint _id) public payable {
+        var user = users[_account];
+        delete user.todoMap[_id];
+        // set the count of todo one less
+        user.todoCount --;
+    }
 
 }
