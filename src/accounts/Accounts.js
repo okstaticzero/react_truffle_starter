@@ -35,13 +35,16 @@ export class Accounts extends Component {
                 {this.props.loading ? (
                     <div className="preloader">
                         <img src={ripple} className="ripple" alt="logo" />
-                        Check the uPort app on your mobile phone to approve transaction. <br />This may take a
-      few seconds.
-
+                        Check the uPort app on your mobile phone to approve transaction. <br />
+                        This may take a few seconds.
                     </div>
                 ) : (
                         <form className="login-form" onSubmit={this.handleSubmit}>
-                            <div><Button type="submit" raised primary swapTheming>Verify your identity</Button></div>
+                            <div>
+                                <Button type="submit" raised primary swapTheming>
+                                    Verify your identity
+                                </Button>
+                            </div>
                         </form>
                     )
                 }

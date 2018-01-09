@@ -7,10 +7,10 @@ import './Todos.css';
 import {
   List,
   Card,
-  ListItemControl,
   Checkbox,
   TextField,
   Button,
+  ListItem,
 } from 'react-md';
 
 export class ListTodos extends Component {
@@ -19,6 +19,7 @@ export class ListTodos extends Component {
     this.state = { newTodo: '', account: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
 
   componentDidMount(e) {
@@ -39,6 +40,11 @@ export class ListTodos extends Component {
     this.props.toggleComplete(account, id, this.props.account);
   };
 
+  deleteTodo(id) {
+    const account = this.state.account;
+    this.props.deleteTodo(account, id, this.props.account);
+  }
+
   render() {
     return (
       <div className="Todo-list">
@@ -46,19 +52,25 @@ export class ListTodos extends Component {
           <h4 data-account={this.props.match.params.account}>Account: {this.props.user.name}</h4>
           <List>
             {this.props.todos.todoList.map((todo, index) => (
-              <ListItemControl
-                key={index}
-                primaryAction={
-                  <Checkbox
-                    id={index}
-                    name="list-control-primary"
-                    label={todo.name}
-                    defaultChecked={todo.complete}
-                    onChange={(todo, e) =>
-                      this.toggleComplete(Number(e.target.id))
+              <ListItem
+                key={todo.id}
+                leftAvatar={<Checkbox
+                  id={todo.id}
+                  name="list-control-primary"
+                  aria-label={todo.name}
+                  defaultChecked={todo.complete}
+                  onChange={(todo, e) =>
+                    this.toggleComplete(Number(e.target.id))
+                    } 
+                />}
+                rightIcon={<i className="fa fa-trash-o" 
+                    aria-hidden="true"
+                    id={todo.id}
+                    onClick={
+                      (e) => this.deleteTodo(Number(e.target.id))
                     }
-                  />
-                }
+                ></i>}
+                primaryText={todo.name}
               />
             ))}
           </List>
@@ -98,6 +110,7 @@ ListTodos.propTypes = {
   createTodo: PropTypes.func,
   fetchTodos: PropTypes.func,
   toggleComplete: PropTypes.func,
+  deleteTodo: PropTypes.func,
   match: PropTypes.object,
   loading: PropTypes.bool,
   todos: PropTypes.object,

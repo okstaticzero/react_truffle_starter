@@ -7,11 +7,8 @@ const TodoContract = contract(Todo);
 
 TodoContract.setProvider(web3.currentProvider);
 
-//const contract_address = "0x285462054eeba5c682beb0d8ac531a0c01eb5dc2";
-
 class Todos {
   async getInstance() {
-    //await TodoContract.at(contract_address);
     const instance = await TodoContract.deployed();
     return instance;
   }
@@ -45,14 +42,14 @@ class Todos {
   async toggleComplete(account, id, userAddress) {
     const instance = await this.getInstance();
     await instance.toggleComplete(account, id, { from: userAddress });
-    const items = await this.getAllTodos();
+    const items = await this.getMyData(account);
     return items;
   }
 
   async deleteTodo(account, id, userAddress) {
     const instance = await this.getInstance();
     await instance.deleteTodo(account, id, { from: userAddress });
-    const items = await this.getAllTodos();
+    const items = await this.getMyData(account);
     return items;
   }
 }

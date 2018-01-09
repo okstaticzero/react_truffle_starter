@@ -38,6 +38,7 @@ export const fetchTodos = (account) => {
       dispatch(todosSuccess(todosArr));
       dispatch(showPreloader(false));
     } catch (error) {
+      console.log(error);
       dispatch(showPreloader(false));
     }
   };
@@ -52,6 +53,7 @@ export const createTodo = (title, account, userAddress) => {
       dispatch(todosSuccess(todosArr));
       dispatch(showPreloader(false));
     } catch (error) {
+      console.log(error);
       dispatch(showPreloader(false));
     }
   };
@@ -64,7 +66,9 @@ export const toggleComplete = (account, id, userAddress) => {
       const todos = await Todos.toggleComplete(account, id, userAddress);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
-    } catch (err) {
+      dispatch(showPreloader(false));
+    } catch (error) {
+      console.log(error);
       dispatch(showPreloader(false));
     }
   };
@@ -77,7 +81,9 @@ export const deleteTodo = (account, id, userAddress) => {
       const todos = await Todos.deleteTodo(account, id, userAddress);
       const todosArr = reformatTodos(todos);
       dispatch(todosSuccess(todosArr));
-    } catch (err) {
+      dispatch(showPreloader(false));
+    } catch (error) {
+      console.log(error);
       dispatch(showPreloader(false));
     }
   }

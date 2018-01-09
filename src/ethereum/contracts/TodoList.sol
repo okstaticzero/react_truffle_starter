@@ -13,6 +13,7 @@ contract TodoList {
         uint id;
         uint todoCount;
         mapping(uint => Todo) todoMap;
+        uint[] todoListIds;
     }
 
     mapping (address => User) users;
@@ -39,13 +40,14 @@ contract TodoList {
     //returns user name/id and all todos associated with you account
     function getMyData(address _account) view public returns (uint[], bytes32[], bool[]) {
         var user = users[_account];
-        var todoCount = user.todoCount;
-        uint[] memory ids = new uint[](todoCount);
-        bool[] memory complete = new bool[](todoCount);
-        bytes32[] memory titles = new bytes32[](todoCount);
+        var lengthOfTodoList = user.todoListIds.length;
+        uint[] memory ids = new uint[](lengthOfTodoList);
+        bool[] memory complete = new bool[](lengthOfTodoList);
+        bytes32[] memory titles = new bytes32[](lengthOfTodoList);
         
-        for (uint i = 0; i < user.todoCount; i++) {
-            Todo memory currentTodo = user.todoMap[i];
+        for (uint i = 0; i < user.todoListIds.length; i++) {
+            var current = user.todoListIds[i];
+            Todo memory currentTodo = user.todoMap[current];
             ids[i] = currentTodo.id;
             titles[i] = currentTodo.name;
             complete[i] = currentTodo.completed;
@@ -58,7 +60,7 @@ contract TodoList {
         var user = users[_account];
         Todo memory todo = Todo(user.todoCount, _todo, false);
         user.todoMap[user.todoCount] = todo;
-        todo.name = _todo;
+        user.todoListIds.push(user.todoCount);
         user.todoCount ++;
     }
     
@@ -72,11 +74,10 @@ contract TodoList {
             }
         }
             
-    function deleteTodo (address _account, uint _id) public payable {
+    function deleteTodo(address _account, uint _id) public payable {
         var user = users[_account];
-        delete user.todoMap[_id];
-        // set the count of todo one less
-        user.todoCount --;
+        user.todoListIds[_id] = user.todoListIds[user.todoListIds.length-1];
+        user.todoListIds.length--;
     }
 
 }
