@@ -30,3 +30,4 @@ This project is a boilerplate to quickly get started building DApps (Distributed
 * Command for running the front end: `yarn start`
 * Command for connecting to the Ropsten test network: `truffle migrate --network ropsten`
     Make sure that on MetaMask you are connected to Ropsten as well (keep in mind that this network is share with everyone using this network, so we can all see those todo's you will put up there).
+* for running on the Rinkeby network so you use Uport run `truffle compile` and then `truffle migrate --network rinkeby`
