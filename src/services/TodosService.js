@@ -25,9 +25,9 @@ class Todos {
     return items;
   }
 
-  async createAccount(name, userAddress) {
+  async createAccount(userAddress) {
     const instance = await this.getInstance();
-    const item = await instance.createAccount(name, { from: userAddress });
+    const item = await instance.createAccount({ from: userAddress });
     return item.receipt.from;
 
   }

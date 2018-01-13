@@ -16,23 +16,27 @@ contract TodoList {
         uint[] todoListIds;
     }
 
-    mapping (address => User) users;
+    mapping (address => User) public users;
     address[] public userAccts;
     uint count = 1;
     
-    //note: setUser must be called before adding todos
-    function createAccount(string _name) public {
+    //note: createAccount must be called before adding todos
+    function createAccount() public returns (address) {
         if (users[msg.sender].id != 0) {
             return; //if already set, don't set store again
         }
         var user = users[msg.sender];
-        user.name = _name;
         user.todoCount = 0; //keep track of todos for each user
         user.id = count;
         count ++;
         userAccts.push(msg.sender);
+        return msg.sender;
     }
     
+    function getTodoListLength(address _account) view public returns(uint) {
+        return users[_account].todoListIds.length;
+    }
+
     function getAllUsers() view public returns (address[]) {
         return userAccts;
     }
