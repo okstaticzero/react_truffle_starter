@@ -32,10 +32,14 @@ class Todos {
 
   }
 
-  async createTodo(name, account, userAddress) {
+  async createTodo(hash1, hash2, account, userAddress) {
     const instance = await this.getInstance();
-    const resp = await instance.addTodo(name, account, { from: userAddress });
+    console.log('11111: ', hash1);
+    console.log('22222: ', hash2);
+    const resp = await instance.addTodo(hash1, hash2, account, { from: userAddress });
+    console.log('solidity response: ', resp);
     const items = await this.getMyData(resp.receipt.from);
+    console.log('items: ', items);
     return items;
   }
 

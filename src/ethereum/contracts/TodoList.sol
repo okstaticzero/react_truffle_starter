@@ -1,10 +1,10 @@
 pragma solidity ^0.4.17;
 
-
 contract TodoList {
      struct Todo {
         uint id;
-        bytes32 name;
+        bytes32 hash1;
+        bytes32 hash2;
         bool completed;
     }
     
@@ -42,27 +42,29 @@ contract TodoList {
     }
     
     //returns user name/id and all todos associated with you account
-    function getMyData(address _account) view public returns (uint[], bytes32[], bool[]) {
+    function getMyData(address _account) view public returns (uint[], bytes32[],bytes32[], bool[]) {
         var user = users[_account];
         var lengthOfTodoList = user.todoListIds.length;
         uint[] memory ids = new uint[](lengthOfTodoList);
         bool[] memory complete = new bool[](lengthOfTodoList);
-        bytes32[] memory titles = new bytes32[](lengthOfTodoList);
+        bytes32[] memory hashes1 = new bytes32[](lengthOfTodoList);
+        bytes32[] memory hashes2 = new bytes32[](lengthOfTodoList);
         
         for (uint i = 0; i < user.todoListIds.length; i++) {
             var current = user.todoListIds[i];
             Todo memory currentTodo = user.todoMap[current];
             ids[i] = currentTodo.id;
-            titles[i] = currentTodo.name;
+            hashes1[i] = currentTodo.hash1;
+            hashes2[i] = currentTodo.hash2;
             complete[i] = currentTodo.completed;
         }
         
-        return (ids, titles, complete);
+        return (ids, hashes1, hashes2, complete);
     }
     
-    function addTodo(bytes32 _todo, address _account) public {
+    function addTodo(bytes32 _hash1, bytes32 _hash2, address _account) public {
         var user = users[_account];
-        Todo memory todo = Todo(user.todoCount, _todo, false);
+        Todo memory todo = Todo(user.todoCount, _hash1, _hash2, false);
         user.todoMap[user.todoCount] = todo;
         user.todoListIds.push(user.todoCount);
         user.todoCount ++;
