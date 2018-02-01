@@ -20,6 +20,7 @@ export class Accounts extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         const indentiy = await initAccount();
+        //alert(indentiy.userProfile.name)
         this.props.createAccount(indentiy.specificNetworkAddress, indentiy.userProfile);
     };
 

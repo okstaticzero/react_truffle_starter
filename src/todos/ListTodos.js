@@ -53,11 +53,11 @@ export class ListTodos extends Component {
           <List>
             {this.props.todos.todoList.map((todo, index) => (
               <ListItem
-                key={todo.id}
+                key={todo.timestamp}
                 leftAvatar={<Checkbox
-                  id={todo.id}
+                  id={index}
                   name="list-control-primary"
-                  aria-label={todo.hash1}
+                  aria-label="left"
                   defaultChecked={todo.complete}
                   onChange={(todo, e) =>
                     this.toggleComplete(Number(e.target.id))
@@ -65,12 +65,12 @@ export class ListTodos extends Component {
                 />}
                 rightIcon={<i className="fa fa-trash-o"
                   aria-hidden="true"
-                  id={todo.id}
+                  id={todo.timestamp}
                   onClick={
                     (e) => this.deleteTodo(Number(e.target.id))
                   }
                 ></i>}
-                primaryText={todo.data.title}
+                primaryText={todo.title}
               />
             ))}
           </List>

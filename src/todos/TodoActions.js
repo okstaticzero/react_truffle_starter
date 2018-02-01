@@ -1,4 +1,5 @@
-import { web3 } from '../util/web3Util';
+//import { web3 } from '../util/web3Util';
+import { web3 } from "../util/Uport";
 import * as types from '../store/actionTypes';
 import Todos from '../services/TodosService';
 import { setJSON } from '../util/IPFS'
@@ -37,24 +38,7 @@ export const fetchTodos = (account) => {
     dispatch(showPreloader(true));
     try {
       const todos = await Todos.getMyData(account);
-      const todosArr = reformatTodos(todos);
-      //push all ipfs addresses into array
-      const ipfsArr = [];
-      todosArr.forEach((todo) => {
-        const url = `https://ipfs.infura.io/ipfs/${todo.hash}`;
-        ipfsArr.push(url)
-      })
-      ////testing - need to remove this
-      ipfsArr.shift()
-      ///
-      const getAllIPFS = () => {
-        return ipfsArr.map((address, i) => {
-          return axios.get(address);
-        })
-
-      }
-
-      const axiosArr = await axios.all(getAllIPFS())
+      const axiosArr = await formatAndGetIPFS(todos);
       //
       dispatch(todosSuccess(axiosArr));
       dispatch(showPreloader(false));
@@ -65,8 +49,6 @@ export const fetchTodos = (account) => {
   };
 };
 
-
-
 export const createTodo = (title, account, userAddress) => {
   return async dispatch => {
     dispatch(showPreloader(true));
@@ -76,8 +58,10 @@ export const createTodo = (title, account, userAddress) => {
       const hash1 = ipfsHash.substr(0, 32);
       const hash2 = ipfsHash.substr(32);
       const todos = await Todos.createTodo(hash1, hash2, account, userAddress);
-      const todosArr = reformatTodos(todos);
-      dispatch(todosSuccess(todosArr));
+      //////////////////
+      const axiosArr = await formatAndGetIPFS(todos);
+      ///
+      dispatch(todosSuccess(axiosArr));
       dispatch(showPreloader(false));
     } catch (error) {
       console.log(error);
@@ -85,6 +69,31 @@ export const createTodo = (title, account, userAddress) => {
     }
   };
 };
+
+const formatAndGetIPFS = async (todos) => {
+  const todosArr = reformatTodos(todos);
+  console.log('XXXXXXXX: ', todosArr);
+  //push all ipfs addresses into array
+  const ipfsArr = [];
+  todosArr.forEach((todo) => {
+    const url = `https://ipfs.infura.io/ipfs/${todo.hash}`;
+    ipfsArr.push(url)
+  })
+  ////testing - need to remove this
+  ipfsArr.shift()
+  ///
+  const ipfsDataArr = ipfsArr.map((address, i) => {
+    return axios.get(address);
+  })
+  //
+  const axiosArr = await axios.all(ipfsDataArr);
+  //add todo contract data to IPFS data
+  const mixedData = axiosArr.map((item, i) => {
+    return { ...item.data, ...todosArr[i] }
+  })
+  console.log('mixedData: ', mixedData);
+  return mixedData;
+}
 
 export const toggleComplete = (account, id, userAddress) => {
   return async dispatch => {
