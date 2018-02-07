@@ -80,7 +80,7 @@ const formatAndGetIPFS = async (todos) => {
     ipfsArr.push(url)
   })
   ////testing - need to remove this
-  ipfsArr.shift()
+  //ipfsArr.shift()
   ///
   const ipfsDataArr = ipfsArr.map((address, i) => {
     return axios.get(address);

@@ -5,6 +5,12 @@ var mnemonic =
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
+  solc: {
+		optimizer: {
+			enabled: true,
+			runs: 200
+		}
+	},
   networks: {
     development: {
       host: 'localhost',
@@ -28,7 +34,7 @@ module.exports = {
       ),
       network_id: 4,
       gas: 6712388,
-      gasPrice: 100000000
+      gasPrice: 1000000000
     },
   },
 };
