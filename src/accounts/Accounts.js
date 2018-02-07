@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import ripple from '../assets/images/ripple.svg';
 import { getAllUsers, createAccount } from './AccountsActions';
+import Loader from '../Loader'
 import './Accounts.css';
 import {
     Button,
@@ -34,11 +35,7 @@ export class Accounts extends Component {
                 </p>
                 <br />
                 {this.props.loading ? (
-                    <div className="preloader">
-                        <img src={ripple} className="ripple" alt="logo" />
-                        Check the uPort app on your mobile phone to approve transaction. <br />
-                        This may take a few seconds.
-                    </div>
+                    <Loader />
                 ) : (
                         <form className="login-form" onSubmit={this.handleSubmit}>
                             <div>

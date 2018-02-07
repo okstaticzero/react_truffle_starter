@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ripple from '../assets/images/ripple.svg';
 import { connect } from 'react-redux';
 import { fetchTodos, createTodo, toggleComplete, deleteTodo } from '../todos/TodoActions';
+import Loader from '../Loader'
 import './Todos.css';
 import {
   List,
@@ -86,13 +87,7 @@ export class ListTodos extends Component {
                 onChange={name => this.setState({ newTodo: name })}
               />
               {this.props.loading ? (
-                <div className="preloader">
-                  <img src={ripple} className="ripple" alt="logo" />
-                  <p>
-                    Waiting for transaction to complete. <br />This may take a
-                    few seconds.
-                  </p>
-                </div>
+                <Loader />
               ) : (
                   <Button type="submit" raised primary swapTheming>
                     Add Todo
