@@ -9,7 +9,10 @@ if (typeof provider !== 'undefined') {
   provider = new Web3.providers.HttpProvider('http://localhost:7545');
 }
 //get accounts, then set default account
-provider.eth.getAccounts(function(err, res) {
+export let account;
+provider.eth.getAccounts(function (err, res) {
+  account = res[0];
+  console.log('ACCOUNT:: ', res[0]);
   provider.eth.defaultAccount = res[0];
 });
 

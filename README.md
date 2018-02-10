@@ -22,6 +22,7 @@ This project is a boilerplate to quickly get started building DApps (Distributed
 * Command to compile contracts: `compile`
 * Command to migrate contracts: `migrate`
 * Command to run tests for the contracts: `test`
+* To switch between uPort and Metamask, uncomment web3 declerations in Accounts.js (line 24) and Todo Services (lines 2, 3)
 
 * Note:`truffle develop` runs a local test node on localhost:9545 `truffle develop` Needs to be running when interacting with your contracts
 * Metamask needs to point to localhost:9545 For directions, read here under title "USING METAMASK WITH TRUFFLE DEVELOP" http://truffleframework.com/docs/advanced/truffle-with-metamask

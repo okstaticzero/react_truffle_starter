@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ripple from '../assets/images/ripple.svg';
 import { getAllUsers, createAccount } from './AccountsActions';
 import Loader from '../Loader'
+import { web3, account } from '../util/web3Util';
 import './Accounts.css';
 import {
     Button,
@@ -20,9 +21,18 @@ export class Accounts extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-        const indentiy = await initAccount();
-        //alert(indentiy.userProfile.name)
-        this.props.createAccount(indentiy.specificNetworkAddress, indentiy.userProfile);
+        let web3 = "uport";
+        //let web3 = "standard";
+        if (web3 == "standard") {
+            console.log("account: ", account)
+            this.props.createAccount(account, { name: "Test Name", avatar: { uri: "" } }, false);
+        } else {
+            //use uPort
+            const indentiy = await initAccount();
+            this.props.createAccount(indentiy.specificNetworkAddress, indentiy.userProfile, true);
+        }
+
+
     };
 
     render() {
