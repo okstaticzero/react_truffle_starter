@@ -6,15 +6,15 @@ module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
   solc: {
-		optimizer: {
-			enabled: true,
-			runs: 200
-		}
-	},
+    optimizer: {
+      enabled: true,
+      runs: 200
+    }
+  },
   networks: {
     development: {
       host: 'localhost',
-      port: 9545,
+      port: 7545,
       network_id: '*', // match any network
     },
     ropsten: {
